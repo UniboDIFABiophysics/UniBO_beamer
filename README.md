@@ -1,6 +1,6 @@
 | **Author**   | **Project** | **Build Status**              |
 |:------------:|:-----------:|:-----------------------------:|
-|   [**N. Curti**](https://github.com/Nico-Curti)   |  **UniBO Beamer Theme**  | **Linux** : [![travis](https://travis-ci.com/UniboDIFABiophysics/UniBO_beamer.svg?branch=master)](https://travis-ci.com/UniboDIFABiophysics/UniBO_beamer) <br/> **Windows** : [![appveyor](https://ci.appveyor.com/api/projects/status/r6ng1l01429m3ysa?svg=true)](https://ci.appveyor.com/project/Nico-Curti/unibo-beamer) |
+|   [**N. Curti**](https://github.com/Nico-Curti)   |  **UniBO Beamer Theme**  | **Linux** : [![travis](https://travis-ci.com/UniboDIFABiophysics/UniBO_beamer.svg?branch=master)](https://travis-ci.com/UniboDIFABiophysics/UniBO_beamer) <br/> **Windows** : *miss* |
 
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/UniboDIFABiophysics/UniBO_beamer.svg?style=plastic)](https://github.com/UniboDIFABiophysics/UniBO_beamer/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/UniboDIFABiophysics/UniBO_beamer.svg?style=plastic)](https://github.com/UniboDIFABiophysics/UniBO_beamer/issues)
