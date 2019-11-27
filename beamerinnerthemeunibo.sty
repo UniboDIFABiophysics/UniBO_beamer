@@ -13,25 +13,30 @@
     \node[inner sep=0pt] (logo) at (1.1,\the\paperheight-40.725)
     {\includegraphics[scale=.145]{logo.png}};
 
-    \node[anchor=west, white, font=\tiny] (alma) at (1.8, 0.4)
+    \node[anchor=west, white, font=\scriptsize] (alma) at (1.8, 0.5)
     {\textbf{\textsc{ALMA MATER STUDIORUM $\cdot$ UNIVERSIT\`A DI BOLOGNA}}}; % bottom tag
 
     \node[anchor=west, black] (Alma) at (1.8, \the\paperheight - 20)
     {\textbf{\textsc{Alma Mater Studiorum $\cdot$ Università di Bologna}}}; % header
 
     \node[anchor=west, black] (school) at (2, \the\paperheight - 40)
-    {\textsc{Scuola di Scienze Matematiche, Fisiche e Naturali}}; % sub header
+    {\scriptsize{\textsc{Dipartimento di Medicina Specialistica, Diagnostica e Sperimentale}}}; % sub header
 
     \ifx\insertsubtitle\@empty
     \else%
-      \node[anchor=center, black] (school) at (\the\paperwidth * .5, \the\paperheight - 60)
+      \node[anchor=center, black, align=center, text width=10cm] (school) at (\the\paperwidth * .5, \the\paperheight - 60)
       {\insertsubtitle}; % subtitle
     \fi
 
-    \node[anchor=center, black] (author) at (\the\paperwidth * .5, \the\paperheight - 200)
+    \node[anchor=center, black, align=center, text width=10cm] (author) at (\the\paperwidth * .5, \the\paperheight - 150)
     {\insertauthor}; % author
-    \node[anchor=center, black] (date) at (\the\paperwidth * .5, \the\paperheight - 220)
-    {\insertdate}; % date
+    \ifx\insertinstitute\@empty
+    \else%
+      \node[anchor=center, black, text width=10cm] (institute) at (\the\paperwidth * .5, \the\paperheight - 200)
+      {\scriptsize{\emph{\textsf{\insertinstitute}}}}; % institute
+    \fi
+    \node[anchor=center, black] (date) at (\the\paperwidth * .5, \the\paperheight - 240)
+    {\small{\insertdate}}; % date
 
     %\fill[color=blue!50!cyan!80] (3.05,0) rectangle(\the\paperwidth,1.);
     \ifnum\thepage>1\relax%

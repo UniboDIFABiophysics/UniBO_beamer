@@ -1,11 +1,19 @@
-\documentclass{beamer}
-\usepackage[utf8]{inputenc}
+\documentclass[10pt, technote, oribibl]{beamer}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{bbding}
 
 \title{Unibo Theme example}
 \subtitle{Beamer version of Unibo template}
 \date[\today]{\today}
-\author[Nico Curti]{Nico Curti}
+\author[Nico Curti]{Nico Curti\inst{1, 2}}
+\institute[UniBO]{\inst{1} %
+                    Department of Experimental, Diagnostic and Specialty Medicine, University of Bologna
+                  \and
+                  \inst{2} %
+                    Department of Physics and Astronomy, University of Bologna
+                 }
 
 \usetheme{unibo}
 
@@ -47,5 +55,7 @@ There is no largest prime number.
 \end{itemize}
 
 \end{frame}
+
+\makethanks % template acknowledgement
 
 \end{document}
