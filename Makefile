@@ -1,8 +1,10 @@
 ifeq ($(OS), Windows_NT)
 	remove = del /s
+	magick = magick.exe convert
 	sep = \\
 else
 	remove = rm -f
+	magick = convert
 	sep = /
 endif
 
@@ -25,8 +27,8 @@ img/%.pdf: img/%.svg
 	inkscape -D -z --file=$< --export-pdf=$@ --export-latex
 
 gif/%-0.png: img/%.gif
-	mkdir -p gif
-	magick convert -coalesce $< gif/$*.png
+	@mkdir -p gif
+	$(magick) -coalesce $< gif/$*.png
 
 presentation: $(file) \
 			$(pdf_img) $(gif_split)
