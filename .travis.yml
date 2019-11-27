@@ -22,10 +22,10 @@ matrix:
              - curl
              - sed
              - grep
+             - imagemagick
 
   timeout: 3600
 
 script:
 
-  - apt-get install imagemagick
   - make presentation
