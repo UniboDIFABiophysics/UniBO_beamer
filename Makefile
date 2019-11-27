@@ -14,6 +14,8 @@ svg_img = $(sort $(wildcard img/*.svg))
 imgs    = $(patsubst img/%.svg, img/%, $(svg_img))
 pdf_img = $(patsubst img/%, img/%.pdf, $(imgs))
 
+gif_img = $(sort $(wildcard img/*.gif))
+gif_split = $(patsubst img/%.gif, gif/%-0.png, $(gif_img))
 
 all: presentation
 
@@ -22,8 +24,12 @@ convert_img: $(pdf_img)
 img/%.pdf: img/%.svg
 	inkscape -D -z --file=$< --export-pdf=$@ --export-latex
 
+gif/%-0.png: img/%.gif
+	mkdir -p gif
+	magick convert -coalesce $< gif/$*.png
+
 presentation: $(file) \
-			$(pdf_img)
+			$(pdf_img) $(gif_split)
 	latexmk -synctex=1 -bibtex -interaction=nonstopmode -file-line-error -pdf $(basename $(file)) -jobname=$(out)
 	$(MAKE) clean
 
