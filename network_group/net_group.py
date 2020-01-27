@@ -31,7 +31,9 @@ class Group (object):
               'Alessandra Merlotti': ( 800, 2100, 'DIFA',  'Dott.ssa', 'group.jpg'),
               "Daniele Dall'Olio"  : (None, None, 'DIFA',  'Dott.',    'danieledallolio.jpg'),
               'Armando Bazzani'    : (None, None, 'DIFA',  'Prof.',    'armandobazzani.jpg'),
-              'Emanuela Marcelli'  : (None, None, 'DIMES', 'Prof.ssa', 'emanuelamarcelli.jpg')
+              'Emanuela Marcelli'  : (None, None, 'DIMES', 'Prof.ssa', 'emanuelamarcelli.jpg'),
+              'Alessandro Fabbri'  : (None, None, 'DIFA',  'Dott.',    'alessandrofabbri.png'),
+              'Chiara Mizzi'       : (None, None, 'DIFA',  'Dott.ssa', 'chiaramizzi.jpg'),
             }
 
   COLORS = {
@@ -44,7 +46,7 @@ class Group (object):
            (255, 0, 0) : 'red'
           }
 
-  AVAILABLE_NAMES = (*COORDS.keys(), "Daniele Dall'Olio", 'Armando Bazzani')
+  AVAILABLE_NAMES = COORDS.keys()
 
   def __init__ (self, members, img_folder=''):
 
@@ -105,7 +107,7 @@ class Group (object):
     w, h, _ = self._group_image.shape
     size = min(w, h)
 
-    photo = Image.open(self.COORDS['Logo UniBO'][-1]).convert('RGB')
+    photo = Image.open(os.path.join(self.img_folder, self.COORDS['Logo UniBO'][-1])).convert('RGB')
     photo = cv2.resize(np.asarray(photo), dsize=(size, size))
 
     w, h, _ = photo.shape
@@ -140,23 +142,25 @@ class Group (object):
 
   def view (self):
 
-    pos = nx.spring_layout(self.graph, scale=1, center=(0, 0), dim=2)
+    scale = 20
+    pos = nx.spring_layout(self.graph, scale=scale, center=(0, 0), dim=2)
 
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 10))
     fig.subplots_adjust(left=.05, right=.95, top=.95, bottom=.05)
 
     ax.set_aspect('equal')
 
-    labels  = {n : n for n in self.graph.node}
-    pos_lbl = {n : (x, y - .3) for n, (x, y) in pos.items()}
+    labels  = {n : n for n in self.graph.nodes}
+    pos_lbl = {n : (x, y - 5.5) for n, (x, y) in pos.items()}
     edge_color = [self.CMAP[self.COLORS[self.COORDS[member][2]]] for member in self.members]
     legend = set(edge_color)
 
     nx.draw_networkx_edges(self.graph, pos=pos, width=10., alpha=1, edge_color=edge_color, ax=ax)
     nx.draw_networkx_labels(self.graph, pos=pos_lbl, labels=labels, font_size=18, ax=ax, font_weight='bold')
 
-    ax.set_xlim(-1.5, 1.5)
-    ax.set_ylim(-1.5, 1.5)
+    scale += .5
+    ax.set_xlim(-scale, scale)
+    ax.set_ylim(-scale, scale)
 
     trans_fig = ax.transData.transform
     trans_axs = fig.transFigure.inverted().transform
@@ -171,7 +175,7 @@ class Group (object):
 
       im = plt.axes([xa - p2, ya - p2, img_size, img_size])
       im.set_aspect('equal')
-      im.imshow(self.graph.node[n]['image'])
+      im.imshow(self.graph.nodes[n]['image'])
       im.axis('off')
 
     for color in legend:
@@ -193,7 +197,7 @@ def parse_args ():
   parser = argparse.ArgumentParser(description=description)
 
   parser.add_argument('--members',    required=True,  type=str, nargs='+', help='Members name')
-  parser.add_argument('--output',     required=False, type=str, action='store', default='group',  help='Output filename of image group')
+  parser.add_argument('--output',     required=False, type=str, action='store', default='group',  help='Output filename of image group (without extension)')
   parser.add_argument('--img_folder', required=False, type=str, action='store', default='../img', help='Path/directory in which the images are stored')
 
   args = parser.parse_args()

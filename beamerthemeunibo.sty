@@ -16,6 +16,54 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=true]
 
+\setbeamercovered{invisible}
+\setbeamercovered{transparent}
+
+\setbeamerfont{structure}{series=\bfseries}
+\setbeamerfont{alerted text}{series=\bfseries}
+
+\setbeamerfont{block title}{size=\footnotesize}
+\setbeamerfont{block body}{size=\tiny}
+
+\setbeamerfont{block title example}{size=\footnotesize}
+\setbeamerfont{block body example}{size=\tiny}
+
+\setbeamerfont{block title alerted}{size=\footnotesize}
+\setbeamerfont{block body alerted}{size=\tiny}
+
+\setbeamercolor{block title}{fg=black, bg=NormalBlue}
+\setbeamercolor{block body}{bg=LightBlue}
+
+\setbeamercolor{block title example}{fg=black, bg=DarkGreen!40!white}
+\setbeamercolor{block body example}{fg=black, bg=DarkGreen!20!white}
+
+\setbeamercolor{block title alerted}{fg=black, bg=darkred!40!white}
+\setbeamercolor{block body alerted}{fg=black, bg=darkred!20!white}
+
+\setbeamertemplate{itemize/enumerate body begin}{\tiny}
+\setbeamertemplate{itemize/enumerate subbody begin}{\tiny}
+
+\def\supervisor{\@dblarg\beamer@supervisor}
+\long\def\beamer@supervisor[#1]#2{%
+  \def\insertsupervisor{\def\inst{\beamer@insttitle}\def\and{\beamer@andtitle}#2}%
+  \def\beamer@shortsupervisor{#1}%
+  \ifbeamer@autopdfinfo%
+    \def\beamer@andstripped{}%
+    \beamer@stripands#2 \and\relax
+    {\let\inst=\@gobble\let\thanks=\@gobble\def\and{, }\hypersetup{pdfauthor={\beamer@andstripped}}}
+  \fi%
+}
+
+\def\cosupervisor{\@dblarg\beamer@cosupervisor}
+\long\def\beamer@cosupervisor[#1]#2{%
+  \def\insertcosupervisor{\def\inst{\beamer@insttitle}\def\and{\beamer@andtitle}#2}%
+  \def\beamer@shortsupervisor{#1}%
+  \ifbeamer@autopdfinfo%
+    \def\beamer@andstripped{}%
+    \beamer@stripands#2 \and\relax
+    {\let\inst=\@gobble\let\thanks=\@gobble\def\and{, }\hypersetup{pdfauthor={\beamer@andstripped}}}
+  \fi%
+}
 
 % the "thank you" page
 \def\makethanks{%
@@ -24,10 +72,10 @@
    \@thanksgroup
   \end{frame}
 
-  \begin{frame}
-    \frametitle{\@thankstitle}
-    \@thanksmessage
-  \end{frame}
+%  \begin{frame}
+%    \frametitle{\@thankstitle}
+%    \@thanksmessage
+%  \end{frame}
 }
 
 \def\thankstitle#1{\def\@thankstitle{#1}}
@@ -56,7 +104,7 @@
 \thanksgroup{ %
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{group.jpg}
+  \includegraphics[width=0.65\textwidth]{group.jpg}
 \end{figure}
 }
 
